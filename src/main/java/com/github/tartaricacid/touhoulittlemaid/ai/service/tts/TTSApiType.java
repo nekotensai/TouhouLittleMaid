@@ -6,7 +6,8 @@ public enum TTSApiType {
     GPT_SOVITS("gpt-sovits"),
     SILICONFLOW("siliconflow"),
     MINIMAX("minimax"),
-    SYSTEM("system");
+    SYSTEM("system"),
+    OPENAI_TTS("openai-tts");
 
     private final String name;
 

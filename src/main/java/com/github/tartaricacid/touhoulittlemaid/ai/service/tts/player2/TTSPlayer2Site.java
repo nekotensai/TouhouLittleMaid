@@ -96,7 +96,7 @@ public class TTSPlayer2Site implements TTSSite, SupportModelSelect {
         @Override
         public TTSPlayer2Site defaultSite() {
             return new TTSPlayer2Site(API_TYPE, SerializableSite.defaultIcon(API_TYPE),
-                    "http://127.0.0.1:4315/v1/tts/speak", true,
+                    "http://127.0.0.1:4315/v1/tts/speak", false,
                     Map.of(
                             "01955d76-ed5b-7426-8748-4b0e5aea1974", "Olivia (EN)",
                             "01955d76-ed5b-73e0-a88d-cbeb3c5b499d", "Sophia (EN)",
