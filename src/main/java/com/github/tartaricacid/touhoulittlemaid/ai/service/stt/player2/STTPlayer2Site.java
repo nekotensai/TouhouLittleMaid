@@ -87,7 +87,7 @@ public class STTPlayer2Site implements STTSite {
         @Override
         public STTPlayer2Site defaultSite() {
             return new STTPlayer2Site(API_TYPE, SerializableSite.defaultIcon(API_TYPE),
-                    "http://127.0.0.1:4315/v1/stt", true,
+                    "http://127.0.0.1:4315/v1/stt", false,
                     Map.of("player2-game-key", "TouhouLittleMaid"));
         }
 

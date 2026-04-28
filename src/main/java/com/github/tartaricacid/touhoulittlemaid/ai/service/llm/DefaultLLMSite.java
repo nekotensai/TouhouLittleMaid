@@ -11,7 +11,7 @@ import java.util.Map;
 
 public final class DefaultLLMSite {
     public static LLMOpenAISite PLAYER2 = createSite("player2",
-            "http://127.0.0.1:4315/v1/chat/completions", true,
+            "http://127.0.0.1:4315/v1/chat/completions", false,
             Map.of("player2-game-key", "TouhouLittleMaid"),
             "default");
 
