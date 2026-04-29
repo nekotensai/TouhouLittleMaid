@@ -19,9 +19,9 @@ description = "A new version of the minecraft mod inspired by the LittleMaidReen
 catalogueItemIcon = "touhou_little_maid:hakurei_gohei"
 
 [[dependencies.touhou_little_maid]]
-modId = "forge"
+modId = "neoforge"
 mandatory = true
-versionRange = "[46,)"
+versionRange = "[47.1,)"
 ordering = "NONE"
 side = "BOTH"
 
