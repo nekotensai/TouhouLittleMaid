@@ -60,6 +60,8 @@ public interface STTClient extends Client {
         } catch (JsonSyntaxException e) {
             String message = "Exception %s, JSON is: %s".formatted(e.getLocalizedMessage(), response.body());
             callback.onFailure(request, new Throwable(message), ErrorCode.JSON_DECODE_ERROR);
+        } catch (Exception e) {
+            callback.onFailure(request, e, ErrorCode.REQUEST_RECEIVED_ERROR);
         }
     }
 }
