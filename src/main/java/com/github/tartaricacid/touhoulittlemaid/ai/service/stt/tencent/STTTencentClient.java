@@ -43,7 +43,7 @@ public class STTTencentClient implements STTClient {
             return;
         }
 
-        URI uri = URI.create(this.site.url());
+        URI uri = URI.create(Client.normalizeUrl(this.site.url()));
 
         MicrophoneManager.startRecord(info.getName(), FORMAT, data -> {
             long timestamp = System.currentTimeMillis() / 1000;

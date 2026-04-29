@@ -1,5 +1,6 @@
 package com.github.tartaricacid.touhoulittlemaid.ai.service.tts.player2;
 
+import com.github.tartaricacid.touhoulittlemaid.ai.service.Client;
 import com.github.tartaricacid.touhoulittlemaid.TouhouLittleMaid;
 import com.github.tartaricacid.touhoulittlemaid.ai.manager.entity.TTSCallback;
 import com.github.tartaricacid.touhoulittlemaid.ai.service.ErrorCode;
@@ -44,7 +45,7 @@ public class TTSPlayer2Client implements TTSClient, TTSSystemServices {
 
     @OnlyIn(Dist.CLIENT)
     private void handle(String message, TTSConfig config) {
-        URI url = URI.create(this.site.url());
+        URI url = URI.create(Client.normalizeUrl(this.site.url()));
         String model = config.model();
 
         TTSPlayer2Request request = TTSPlayer2Request.create()

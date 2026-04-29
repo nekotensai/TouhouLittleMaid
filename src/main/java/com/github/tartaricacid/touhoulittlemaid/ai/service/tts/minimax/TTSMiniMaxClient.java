@@ -1,5 +1,6 @@
 package com.github.tartaricacid.touhoulittlemaid.ai.service.tts.minimax;
 
+import com.github.tartaricacid.touhoulittlemaid.ai.service.Client;
 import com.github.tartaricacid.touhoulittlemaid.ai.manager.entity.TTSCallback;
 import com.github.tartaricacid.touhoulittlemaid.ai.service.ErrorCode;
 import com.github.tartaricacid.touhoulittlemaid.ai.service.tts.TTSClient;
@@ -32,7 +33,7 @@ public class TTSMiniMaxClient implements TTSClient {
 
     @Override
     public void play(String message, TTSConfig config, TTSCallback callback) {
-        URI url = URI.create(this.site.url());
+        URI url = URI.create(Client.normalizeUrl(this.site.url()));
         String apiKey = this.site.secretKey();
         String voiceId = config.model();
         String siteModel = this.site.siteModel();

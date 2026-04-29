@@ -1,5 +1,6 @@
 package com.github.tartaricacid.touhoulittlemaid.ai.service.stt.aliyun;
 
+import com.github.tartaricacid.touhoulittlemaid.ai.service.Client;
 import com.github.tartaricacid.touhoulittlemaid.ai.service.ErrorCode;
 import com.github.tartaricacid.touhoulittlemaid.ai.service.ResponseCallback;
 import com.github.tartaricacid.touhoulittlemaid.ai.service.stt.STTClient;
@@ -37,7 +38,7 @@ public class STTAliyunClient implements STTClient {
             callback.onFailure(null, new Throwable("No suitable microphone found"), ErrorCode.MICROPHONE_NOT_FOUND);
             return;
         }
-        URI uri = URI.create(this.site.url());
+        URI uri = URI.create(Client.normalizeUrl(this.site.url()));
 
         MicrophoneManager.startRecord(info.getName(), FORMAT, data -> {
             HttpRequest request = HttpRequest.newBuilder().uri(uri)

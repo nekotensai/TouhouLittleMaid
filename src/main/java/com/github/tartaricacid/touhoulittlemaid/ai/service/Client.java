@@ -30,4 +30,11 @@ public interface Client {
     default boolean shouldStopChat(@Nullable EntityMaid maid) {
         return maid == null || !maid.isAlive();
     }
+
+    static String normalizeUrl(String url) {
+        if (url != null && !url.startsWith("http://") && !url.startsWith("https://")) {
+            return "http://" + url;
+        }
+        return url;
+    }
 }

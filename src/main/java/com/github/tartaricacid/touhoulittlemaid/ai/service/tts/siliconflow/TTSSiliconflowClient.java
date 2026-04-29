@@ -1,5 +1,6 @@
 package com.github.tartaricacid.touhoulittlemaid.ai.service.tts.siliconflow;
 
+import com.github.tartaricacid.touhoulittlemaid.ai.service.Client;
 import com.github.tartaricacid.touhoulittlemaid.ai.manager.entity.TTSCallback;
 import com.github.tartaricacid.touhoulittlemaid.ai.service.tts.TTSClient;
 import com.github.tartaricacid.touhoulittlemaid.ai.service.tts.TTSConfig;
@@ -25,7 +26,7 @@ public class TTSSiliconflowClient implements TTSClient {
 
     @Override
     public void play(String message, TTSConfig config, TTSCallback callback) {
-        URI url = URI.create(this.site.url());
+        URI url = URI.create(Client.normalizeUrl(this.site.url()));
         String apiKey = this.site.secretKey();
         String voice = config.model();
 

@@ -1,6 +1,7 @@
 package com.github.tartaricacid.touhoulittlemaid.ai.service.llm.openai;
 
 
+import com.github.tartaricacid.touhoulittlemaid.ai.service.Client;
 import com.github.tartaricacid.touhoulittlemaid.TouhouLittleMaid;
 import com.github.tartaricacid.touhoulittlemaid.ai.agent.tool.ITool;
 import com.github.tartaricacid.touhoulittlemaid.ai.agent.tool.ToolRegister;
@@ -50,7 +51,7 @@ public class LLMOpenAIClient implements LLMClient {
         EntityMaid maid = callback.getMaid();
 
         // 模型站点信息获取
-        URI url = URI.create(this.site.url());
+        URI url = URI.create(Client.normalizeUrl(this.site.url()));
         String apiKey = this.site.secretKey();
         String model = maid.getAiChatManager().getLLMModel();
         boolean isReasoningModel = this.site.isReasoningModel(model);
