@@ -5,7 +5,6 @@ import com.github.tartaricacid.touhoulittlemaid.ai.manager.setting.CharacterSett
 import com.github.tartaricacid.touhoulittlemaid.ai.manager.setting.SettingReader;
 import com.github.tartaricacid.touhoulittlemaid.ai.manager.site.AvailableSites;
 import com.github.tartaricacid.touhoulittlemaid.ai.service.SupportModelSelect;
-import com.github.tartaricacid.touhoulittlemaid.ai.service.llm.DefaultLLMSite;
 import com.github.tartaricacid.touhoulittlemaid.ai.service.llm.LLMMessage;
 import com.github.tartaricacid.touhoulittlemaid.ai.service.llm.LLMSite;
 import com.github.tartaricacid.touhoulittlemaid.ai.service.llm.openai.response.ToolCall;
@@ -82,16 +81,16 @@ public abstract class MaidAIChatData extends MaidAIChatSerializable {
 
     @Nullable
     public LLMSite getLLMSite() {
-        LLMSite site;
-        if (StringUtils.isBlank(llmSite)) {
-            site = DefaultLLMSite.PLAYER2;
-        } else {
-            site = AvailableSites.getLLMSite(llmSite);
-            if (site == null || !site.enabled()) {
-                site = DefaultLLMSite.PLAYER2;
+        if (StringUtils.isNotBlank(llmSite)) {
+            LLMSite site = AvailableSites.getLLMSite(llmSite);
+            if (site != null && site.enabled()) {
+                return site;
             }
         }
-        return site;
+        return AvailableSites.LLM_SITES.values().stream()
+                .filter(LLMSite::enabled)
+                .findFirst()
+                .orElse(null);
     }
 
     @Nullable

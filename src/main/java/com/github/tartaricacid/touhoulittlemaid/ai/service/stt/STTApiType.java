@@ -4,7 +4,8 @@ public enum STTApiType {
     PLAYER2("player2"),
     ALIYUN("aliyun"),
     SILICONFLOW("siliconflow"),
-    TENCENT("tencent");
+    TENCENT("tencent"),
+    OPENAI_STT("openai-stt");
 
     private final String name;
 
