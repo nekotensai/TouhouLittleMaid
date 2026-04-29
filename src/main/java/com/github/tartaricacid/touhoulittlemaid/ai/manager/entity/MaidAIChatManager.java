@@ -135,22 +135,24 @@ public final class MaidAIChatManager extends MaidAIChatData {
     }
 
     private List<LLMMessage> getMessages(MaidAIChatManager chatManager, String language) {
-        // 如果含有自定义设定，则直接使用自定义设定
+        EntityMaid maid = chatManager.getMaid();
         if (StringUtils.isNotBlank(chatManager.customSetting)) {
-            EntityMaid maid = chatManager.getMaid();
-            String setting = PapiReplacer.replaceSetting(chatManager.customSetting, maid, language);
+            // rawSystemPrompt=true: отправить кастомный промпт как есть, без обёртки FULL_SETTING
+            String setting = chatManager.rawSystemPrompt
+                    ? chatManager.customSetting
+                    : PapiReplacer.replaceSetting(chatManager.customSetting, maid, language);
             return this.buildMessage(setting, maid, chatManager.getHistory());
         }
 
-        // 其他情况下，获取默认设定文件
-        EntityMaid maid = chatManager.getMaid();
         return chatManager.getSetting().map(s -> {
             String setting = s.getSetting(maid, language);
             return this.buildMessage(setting, maid, chatManager.getHistory());
         }).orElseGet(() -> {
             String fallback = AIConfig.DEFAULT_SYSTEM_PROMPT.get();
             if (StringUtils.isNotBlank(fallback)) {
-                return this.buildMessage(fallback, maid, chatManager.getHistory());
+                // fallback тоже оборачиваем в FULL_SETTING, чтобы была информация о мире
+                String setting = PapiReplacer.replaceSetting(fallback, maid, language);
+                return this.buildMessage(setting, maid, chatManager.getHistory());
             }
             return Lists.newArrayList();
         });

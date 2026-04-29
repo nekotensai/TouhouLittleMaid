@@ -16,6 +16,7 @@ public class MaidAIChatSerializable {
 
     public String ownerName = "";
     public String customSetting = "";
+    public boolean rawSystemPrompt = false;
 
     /**
      * 哨兵值，如果为此值，说明此时对当前女仆禁用 TTS 功能
@@ -33,6 +34,7 @@ public class MaidAIChatSerializable {
         chatLanguage = buf.readUtf();
         ownerName = buf.readUtf();
         customSetting = buf.readUtf();
+        rawSystemPrompt = buf.readBoolean();
     }
 
     public void encode(FriendlyByteBuf buf) {
@@ -44,6 +46,7 @@ public class MaidAIChatSerializable {
         buf.writeUtf(chatLanguage);
         buf.writeUtf(ownerName);
         buf.writeUtf(customSetting);
+        buf.writeBoolean(rawSystemPrompt);
     }
 
     public void copyFrom(MaidAIChatSerializable data) {
@@ -55,6 +58,7 @@ public class MaidAIChatSerializable {
         chatLanguage = data.chatLanguage;
         ownerName = data.ownerName;
         customSetting = data.customSetting;
+        rawSystemPrompt = data.rawSystemPrompt;
     }
 
     public CompoundTag readFromTag(CompoundTag tag) {
@@ -68,6 +72,7 @@ public class MaidAIChatSerializable {
             chatLanguage = data.getString("ChatLanguage");
             ownerName = data.getString("OwnerName");
             customSetting = data.getString("CustomSetting");
+            rawSystemPrompt = data.getBoolean("RawSystemPrompt");
         }
         return tag;
     }
@@ -83,6 +88,7 @@ public class MaidAIChatSerializable {
             data.putString("ChatLanguage", chatLanguage);
             data.putString("OwnerName", ownerName);
             data.putString("CustomSetting", customSetting);
+            data.putBoolean("RawSystemPrompt", rawSystemPrompt);
         }
         tag.put("MaidAIChat", data);
         return tag;

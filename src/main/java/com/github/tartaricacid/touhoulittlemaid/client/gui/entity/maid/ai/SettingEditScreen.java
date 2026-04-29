@@ -14,6 +14,7 @@ import com.github.tartaricacid.touhoulittlemaid.util.EntityCacheUtil;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.components.Checkbox;
 import net.minecraft.client.gui.components.EditBox;
 import net.minecraft.client.gui.components.MultiLineEditBox;
 import net.minecraft.client.gui.screens.Screen;
@@ -50,6 +51,7 @@ public class SettingEditScreen extends Screen {
 
     private EditBox ownerName;
     private MultiLineEditBox customSetting;
+    private Checkbox rawPromptCheckbox;
     private long tipTimestamp = -1;
 
     public SettingEditScreen(EntityMaid maid) {
@@ -83,6 +85,14 @@ public class SettingEditScreen extends Screen {
         this.customSetting.setValue(manager.customSetting);
         this.customSetting.setCharacterLimit(4096);
         this.customSetting.setValueListener(s -> manager.customSetting = s);
+
+        MutableComponent rawLabel = Component.translatable("gui.touhou_little_maid.button.maid_ai_chat_config.raw_system_prompt");
+        this.rawPromptCheckbox = Checkbox.builder(rawLabel, font)
+                .pos(posX, customSetting.getY() + customSetting.getHeight() + 4)
+                .selected(manager.rawSystemPrompt)
+                .onValueChange((cb, val) -> manager.rawSystemPrompt = val)
+                .build();
+        this.addRenderableWidget(this.rawPromptCheckbox);
 
         MutableComponent export = Component.translatable("gui.touhou_little_maid.button.maid_ai_chat_config.edit_custom_setting.export");
         this.addRenderableWidget(new FlatColorButton(posX + 265, ownerName.getY(), 128, 20, export,

@@ -464,6 +464,7 @@
   "gui.touhou_little_maid.button.maid_ai_chat_config.edit_custom_setting.export": "Настройки экспорта",
   "gui.touhou_little_maid.button.maid_ai_chat_config.edit_custom_setting.export.format": "YAML файл (*.yml)",
   "gui.touhou_little_maid.button.maid_ai_chat_config.edit_custom_setting.export.success": "Файл успешно экспортирован по следующему пути: %s",
+  "gui.touhou_little_maid.button.maid_ai_chat_config.raw_system_prompt": "Использовать как чистый системный промпт (без обёртки с информацией о мире)",
   "gui.touhou_little_maid.button.maid_ai_chat_config.clear_history_chat": "Очистить историю чата",
   "gui.touhou_little_maid.button.maid_ai_chat_config.clear_history_chat.confirm": "Вы собираетесь очистить историю разговоров AI горничной?",
   "gui.touhou_little_maid.button.maid_ai_chat_config.history_chat_is_empty": "Нет истории диалогов AI чата",
