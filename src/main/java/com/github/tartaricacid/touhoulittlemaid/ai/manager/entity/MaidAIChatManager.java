@@ -143,11 +143,17 @@ public final class MaidAIChatManager extends MaidAIChatData {
         }
 
         // 其他情况下，获取默认设定文件
+        EntityMaid maid = chatManager.getMaid();
         return chatManager.getSetting().map(s -> {
-            EntityMaid maid = chatManager.getMaid();
             String setting = s.getSetting(maid, language);
             return this.buildMessage(setting, maid, chatManager.getHistory());
-        }).orElse(Lists.newArrayList());
+        }).orElseGet(() -> {
+            String fallback = AIConfig.DEFAULT_SYSTEM_PROMPT.get();
+            if (StringUtils.isNotBlank(fallback)) {
+                return this.buildMessage(fallback, maid, chatManager.getHistory());
+            }
+            return Lists.newArrayList();
+        });
     }
 
     /**

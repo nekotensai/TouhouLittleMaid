@@ -10,6 +10,7 @@ public class AIConfig {
 
     public static ModConfigSpec.BooleanValue LLM_ENABLED;
     public static ModConfigSpec.BooleanValue AUTO_GEN_SETTING_ENABLED;
+    public static ModConfigSpec.ConfigValue<String> DEFAULT_SYSTEM_PROMPT;
     public static ModConfigSpec.ConfigValue<String> LLM_PROXY_ADDRESS;
     public static ModConfigSpec.IntValue MAID_MAX_HISTORY_LLM_SIZE;
     public static ModConfigSpec.IntValue MAX_TOKENS_PER_PLAYER;
@@ -32,6 +33,9 @@ public class AIConfig {
 
         builder.comment("Whether to automatically generate the maid's settings");
         AUTO_GEN_SETTING_ENABLED = builder.define("AutoGenSettingEnabled", true);
+
+        builder.comment("Fallback system prompt used when no character setting file or custom setting is configured. Leave empty to keep default behavior (show 'role settings absent' message).");
+        DEFAULT_SYSTEM_PROMPT = builder.define("DefaultSystemPrompt", "");
 
         builder.comment("LLM AI Proxy Address, such as 127.0.0.1:1080, empty is no proxy, SOCKS proxies are not supported").translation(translateKey("llm_proxy_address"));
         LLM_PROXY_ADDRESS = builder.define("LLMProxyAddress", "");
